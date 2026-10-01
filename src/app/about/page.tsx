@@ -6,7 +6,7 @@ import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `Cardboard Mania is a wrestling card dealer based in ${site.homeBase}, buying and selling at card shows across Middle Tennessee.`,
+  description: `Cardboard Mania is a wrestling card dealer buying and selling at card shows across ${site.homeBase}.`,
   alternates: { canonical: "/about" },
 };
 
@@ -41,12 +41,12 @@ export default function AboutPage() {
             hobby turned into Cardboard Mania.
           </p>
           <p>
-            Today I buy and sell wrestling cards — from 80s WWF and WCW to the latest AEW and WWE releases — out of{" "}
-            <strong className="text-gold">{site.homeBase}</strong>. You&apos;ll find me set up at card shows across Middle
-            Tennessee, and I&apos;m always happy to talk shop.
+            Today I buy and sell wrestling cards — from 80s WWF and WCW to the latest AEW and WWE releases. You&apos;ll find me
+            set up at card shows across <strong className="text-gold">{site.homeBase}</strong>, and I&apos;m always happy to
+            talk shop.
           </p>
           <p>
-            Whether you&apos;ve got one card or a closet full, I&apos;ll give you a straight answer and a fair offer.
+            Whether it&apos;s a raw vintage gem or a fresh PSA 10, I&apos;ll give you a straight answer and a fair offer.
           </p>
           <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <Link href="/contact" className="btn-primary">

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import ShowCard from "@/components/ShowCard";
 import SellCta from "@/components/SellCta";
-import { buyTiles, howItWorks, site } from "@/content/site";
+import CardCarousel from "@/components/CardCarousel";
+import { buyTiles, carouselSlides, howItWorks, site } from "@/content/site";
 import { nextShow } from "@/lib/shows";
 
 // Re-check hourly so finished shows drop off without a redeploy.
@@ -17,7 +18,8 @@ export default function HomePage() {
     description: site.description,
     url: site.url,
     email: site.email,
-    address: { "@type": "PostalAddress", addressLocality: "Spring Hill", addressRegion: "TN", addressCountry: "US" },
+    areaServed: { "@type": "AdministrativeArea", name: "Middle Tennessee" },
+    address: { "@type": "PostalAddress", addressRegion: "TN", addressCountry: "US" },
   };
 
   return (
@@ -26,22 +28,34 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="stripe relative overflow-hidden border-b border-line">
-        <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-red/25 blur-3xl" />
-        <div className="container-x relative py-14 sm:py-24">
-          <p className="eyebrow">Cardboard Mania · {site.homeBase}</p>
-          <h1 className="display mt-3 text-6xl sm:text-7xl lg:text-8xl">
-            I Buy <span className="text-red">Wrestling</span> Cards
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-paper/90 sm:text-xl">
-            WWE, WWF, WCW, AEW, ECW and more — singles, collections, sealed.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact?intent=sell" className="btn-primary text-lg">
-              Sell Your Cards
-            </Link>
-            <Link href="/shows" className="btn-secondary">
-              See Upcoming Shows
-            </Link>
+        <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-red/25 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -bottom-32 right-0 h-96 w-96 rounded-full bg-gold/10 blur-3xl" />
+        <div className="container-x relative grid grid-cols-1 items-center gap-10 py-12 sm:py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-14">
+          <div>
+            <p className="eyebrow">Wrestling cards · {site.homeBase}</p>
+            <h1 className="display mt-3 text-7xl sm:text-8xl xl:text-9xl">
+              Cardboard
+              <br />
+              <span className="text-red [text-shadow:4px_4px_0_var(--color-gold)]">Mania</span>
+            </h1>
+            <p className="mt-6 max-w-xl text-xl font-semibold text-paper sm:text-2xl">
+              Buying, selling and trading wrestling cards.
+            </p>
+            <p className="mt-2 max-w-xl text-lg text-paper/80">
+              WWE, WWF, WCW, AEW, ECW and more — graded slabs, autographs and sealed wax. Find me at card shows across{" "}
+              {site.homeBase}.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/contact?intent=sell" className="btn-primary text-lg">
+                Sell Your Cards
+              </Link>
+              <Link href="/shows" className="btn-secondary">
+                See Upcoming Shows
+              </Link>
+            </div>
+          </div>
+          <div className="mx-auto w-full min-w-0 max-w-md lg:max-w-none">
+            <CardCarousel slides={carouselSlides} />
           </div>
         </div>
       </section>
@@ -78,9 +92,9 @@ export default function HomePage() {
         <h2 id="what-i-buy" className="display mt-1 text-3xl sm:text-4xl">
           What I buy
         </h2>
-        <ul className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-3">
+        <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-6 lg:grid-cols-5">
           {buyTiles.map((tile, i) => (
-            <li key={tile.title} className="card group relative overflow-hidden p-4 sm:p-6">
+            <li key={tile.title} className="card group relative overflow-hidden p-4 last:col-span-2 sm:col-span-2 sm:p-6 sm:nth-[n+4]:col-span-3 lg:col-span-1 lg:last:col-span-1 lg:nth-[n+4]:col-span-1">
               <span aria-hidden className="display absolute -right-1 -top-3 text-7xl text-paper/5">
                 {String(i + 1).padStart(2, "0")}
               </span>

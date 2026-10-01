@@ -4,10 +4,10 @@ export const site = {
   name: "Cardboard Mania",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://cardboardmania.com",
   email: "cardboardmania33@gmail.com",
-  homeBase: "Spring Hill, TN",
+  homeBase: "Middle Tennessee",
   tagline: "I Buy Wrestling Cards",
   description:
-    "Cardboard Mania buys wrestling cards — WWE, WWF, WCW, AEW, ECW and more. Singles, collections and sealed. Find me at card shows across Middle Tennessee.",
+    "Cardboard Mania buys wrestling cards — WWE, WWF, WCW, AEW, ECW and more. Singles, graded slabs, autos and sealed. Find me at card shows across Middle Tennessee.",
   // Leave a link empty ("") to hide its icon.
   socials: {
     instagram: "",
@@ -26,7 +26,6 @@ export const buyTiles = [
   { title: "Autos & relics", text: "On-card autos, cut signatures, mat and shirt relics." },
   { title: "Rookies", text: "Key rookie cards from legends to today's roster." },
   { title: "Sealed wax", text: "Boxes, packs and cases — WWE, WCW, AEW and beyond." },
-  { title: "Full collections", text: "Binders, boxes and closets. I'll go through all of it." },
 ];
 
 export const wrestlingBuys = [
@@ -41,7 +40,6 @@ export const wrestlingBuys = [
 export const alsoBuying = [
   "Baseball, basketball, football and hockey — vintage and modern",
   "Pokémon, Marvel, Star Wars and other non-sports cards",
-  "Memorabilia that comes with a collection (signed photos, programs)",
 ];
 
 // Placeholder copy — edit to match what you actually pass on.
@@ -69,7 +67,7 @@ export const faqs = [
   },
   {
     q: "Do I have to bring my cards to a show?",
-    a: "No. You can meet me at a show, arrange a local pickup around Spring Hill, or ship them. I'll walk you through shipping safely.",
+    a: "No. You can meet me at a show, arrange a local pickup around Middle Tennessee, or ship them. I'll walk you through shipping safely.",
   },
   {
     q: "Is there any obligation once I send photos?",
@@ -77,10 +75,40 @@ export const faqs = [
   },
   {
     q: "Do you buy non-wrestling cards?",
-    a: "Yes. Wrestling is my focus, but I also buy sports and non-sports cards, especially as part of a bigger collection.",
+    a: "Yes. Wrestling is my focus, but I also buy sports and non-sports cards, especially vintage and graded cards.",
+  },
+];
+
+// Hero carousel photos (files live in /public/cards).
+export const carouselSlides = [
+  {
+    src: "/cards/roman-reigns-psa10-auto.jpg",
+    alt: "Roman Reigns 2025 Topps x Cactus Jack Famed Phantoms autograph, PSA 10",
+    caption: "Roman Reigns · Famed Phantoms Auto · PSA 10",
   },
   {
-    q: "How big a collection will you look at?",
-    a: "Anything from one card to a whole storage unit. For large collections nearby, I'll come to you.",
+    src: "/cards/savage-martel-cut-auto-1of1.jpg",
+    alt: "Macho Man Randy Savage and Sherri Martel Topps Transcendent dual cut signature, 1 of 1",
+    caption: "Macho Man & Sherri Martel · Transcendent Cut Auto 1/1",
+  },
+  {
+    src: "/cards/alexa-bliss-flawless-auto.jpg",
+    alt: "Alexa Bliss Panini Flawless Finishing Moves autograph",
+    caption: "Alexa Bliss · Flawless Finishing Moves Auto",
+  },
+  {
+    src: "/cards/hogan-austin-autos.jpg",
+    alt: "Hulk Hogan and Stone Cold Steve Austin autographed cards",
+    caption: "Hulk Hogan & \"Stone Cold\" Steve Austin Autos",
+  },
+  {
+    src: "/cards/lesnar-punk-ripley-autos.jpg",
+    alt: "Brock Lesnar, CM Punk and Rhea Ripley autographed cards",
+    caption: "Brock Lesnar, CM Punk & Rhea Ripley Autos",
+  },
+  {
+    src: "/cards/bearer-savage-psa-autos.jpg",
+    alt: "1998 WWF Paul Bearer and 1994 Action Packed Randy Savage autographs, PSA graded",
+    caption: "Paul Bearer & Randy Savage · Vintage WWF PSA Autos",
   },
 ];

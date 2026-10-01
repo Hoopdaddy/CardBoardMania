@@ -7,7 +7,7 @@ import { alsoBuying, dontBuy, faqs, howItWorks, wrestlingBuys } from "@/content/
 export const metadata: Metadata = {
   title: "We Buy Wrestling Cards",
   description:
-    "What Cardboard Mania buys: WWE, WWF, WCW, AEW and ECW singles, graded slabs, autos, sealed wax and full collections. How offers and payment work.",
+    "What Cardboard Mania buys: WWE, WWF, WCW, AEW and ECW singles, graded slabs, autos, relics and sealed wax. How offers and payment work.",
   alternates: { canonical: "/we-buy" },
 };
 
@@ -32,7 +32,7 @@ export default function WeBuyPage() {
       <PageHeader
         eyebrow="We buy"
         title="What I buy"
-        intro="Wrestling cards are my main event — but I'll look at just about any collection."
+        intro="Wrestling cards are my main event — singles, graded slabs, autographs and sealed wax."
       />
 
       <div className="container-x mt-10 grid gap-6 lg:grid-cols-3">

@@ -16,14 +16,14 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — I Buy Wrestling Cards | ${site.homeBase}`,
+    default: `${site.name} — Wrestling Cards Bought & Sold | ${site.homeBase}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name} — I Buy Wrestling Cards`,
+    title: `${site.name} — Wrestling Cards Bought & Sold`,
     description: site.description,
     url: "/",
   },
