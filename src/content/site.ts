@@ -79,6 +79,17 @@ export const faqs = [
   },
 ];
 
+// Sister sites and resources linked from the home page and footer.
+export const resources = {
+  suplex: {
+    name: "Suplex Trading Cards",
+    url: "https://suplexcards.cardboardmania.com/",
+    description:
+      "The complete guide to WWF, WWE and WCW trading cards — free to use. Look up a set, check a checklist, or find out what your cards are before you sell.",
+    features: ["Checklists for 200+ sets", "Every era", "Parallels guide", "Hall of Famer rookie cards", "Collection tracker"],
+  },
+};
+
 // Hero carousel photos (files live in /public/cards).
 export const carouselSlides = [
   {

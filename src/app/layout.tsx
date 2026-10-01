@@ -26,8 +26,10 @@ export const metadata: Metadata = {
     title: `${site.name} — Wrestling Cards Bought & Sold`,
     description: site.description,
     url: "/",
+    images: [{ url: "/cardboard-mania-logo.webp", width: 640, height: 640, alt: "Cardboard Mania logo" }],
   },
-  twitter: { card: "summary_large_image" },
+  icons: { icon: "/cardboard-mania-logo.webp", apple: "/cardboard-mania-logo.webp" },
+  twitter: { card: "summary" },
   alternates: { canonical: "/" },
 };
 

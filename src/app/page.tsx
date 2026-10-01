@@ -1,8 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import ShowCard from "@/components/ShowCard";
 import SellCta from "@/components/SellCta";
 import CardCarousel from "@/components/CardCarousel";
-import { buyTiles, carouselSlides, howItWorks, site } from "@/content/site";
+import { buyTiles, carouselSlides, howItWorks, resources, site } from "@/content/site";
 import { nextShow } from "@/lib/shows";
 
 // Re-check hourly so finished shows drop off without a redeploy.
@@ -31,21 +32,28 @@ export default function HomePage() {
         <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-red/25 blur-3xl" />
         <div aria-hidden className="pointer-events-none absolute -bottom-32 right-0 h-96 w-96 rounded-full bg-gold/10 blur-3xl" />
         <div className="container-x relative grid grid-cols-1 items-center gap-10 py-12 sm:py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-14">
-          <div>
-            <p className="eyebrow">Wrestling cards · {site.homeBase}</p>
-            <h1 className="display mt-3 text-7xl sm:text-8xl xl:text-9xl">
-              Cardboard
-              <br />
-              <span className="text-red [text-shadow:4px_4px_0_var(--color-gold)]">Mania</span>
+          <div className="text-center lg:text-left">
+            <h1>
+              <span className="sr-only">Cardboard Mania — wrestling, sports and non-sport cards</span>
+              <Image
+                src="/cardboard-mania-logo.webp"
+                alt=""
+                width={640}
+                height={640}
+                priority
+                sizes="(min-width: 1024px) 360px, 280px"
+                className="mx-auto h-auto w-[280px] drop-shadow-[0_12px_30px_rgba(227,38,47,0.35)] sm:w-[320px] lg:mx-0 lg:w-[360px]"
+              />
             </h1>
-            <p className="mt-6 max-w-xl text-xl font-semibold text-paper sm:text-2xl">
+            <p className="eyebrow mt-4">Wrestling cards · {site.homeBase}</p>
+            <p className="mx-auto mt-3 max-w-xl text-xl font-semibold text-paper sm:text-2xl lg:mx-0">
               Buying, selling and trading wrestling cards.
             </p>
-            <p className="mt-2 max-w-xl text-lg text-paper/80">
+            <p className="mx-auto mt-2 max-w-xl text-lg text-paper/80 lg:mx-0">
               WWE, WWF, WCW, AEW, ECW and more — graded slabs, autographs and sealed wax. Find me at card shows across{" "}
               {site.homeBase}.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Link href="/contact?intent=sell" className="btn-primary text-lg">
                 Sell Your Cards
               </Link>
@@ -129,6 +137,41 @@ export default function HomePage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      {/* Free resource: Suplex Cards */}
+      <section className="container-x mt-16" aria-labelledby="suplex">
+        <a
+          href={resources.suplex.url}
+          target="_blank"
+          rel="noopener"
+          className="group stripe relative block overflow-hidden rounded-2xl border-2 border-gold/60 bg-ink-2 p-6 transition-colors hover:border-gold sm:p-10"
+        >
+          <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gold/15 blur-3xl" />
+          <div className="relative grid items-center gap-6 lg:grid-cols-[1fr_auto]">
+            <div>
+              <p className="eyebrow">Free collector resource</p>
+              <h2 id="suplex" className="display mt-2 text-4xl sm:text-5xl">
+                {resources.suplex.name}
+              </h2>
+              <p className="mt-3 max-w-2xl text-lg text-paper/85">{resources.suplex.description}</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {resources.suplex.features.map((f) => (
+                  <li key={f} className="rounded-full border border-line bg-ink px-3 py-1 text-sm font-semibold text-paper/90">
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <span className="btn-primary w-full whitespace-nowrap group-hover:bg-red-dark lg:w-auto">
+              Explore Suplex Cards
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                <path d="M7 17L17 7M9 7h8v8" />
+              </svg>
+              <span className="sr-only">(opens in a new tab)</span>
+            </span>
+          </div>
+        </a>
       </section>
 
       {/* Coming soon */}
