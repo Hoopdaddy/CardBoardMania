@@ -1,78 +1,68 @@
-# Cardboard Mania
+# Cardboard Mania — cardboardmania.com
 
-A mobile-first platform for card dealers and collectors — build a personalized
-page from drop-in components (bio, image gallery, want/have lists, show
-calendar, social links) and share it anywhere.
+Mobile-first landing site for Cardboard Mania (Phase 1 MVP from the PRD): Home, We Buy, Shows, About and Contact.
+Built with Next.js 15, Tailwind CSS v4 and TypeScript.
 
-**Domain:** cardboardmania.com · **Status:** Phase 0 + 1 (Foundations + Core MVP)
-
-## Stack
-
-- [Next.js 15](https://nextjs.org) (App Router, TypeScript) + Tailwind CSS v4
-- [Supabase](https://supabase.com) — auth + Postgres (with Row Level Security)
-- [CardSight AI](https://cardsight.ai) — card catalog data (12M+ cards)
-
-## Setup
-
-### 1. Install
+## Run locally
 
 ```bash
 npm install
-```
-
-### 2. Create the Supabase project (free)
-
-1. Go to [supabase.com/dashboard](https://supabase.com/dashboard) → **New project**
-   (any name, e.g. `cardboard-mania`; pick a strong DB password and save it).
-2. When it finishes provisioning, open **SQL Editor → New query**, paste the
-   entire contents of [`supabase/migrations/001_init.sql`](supabase/migrations/001_init.sql),
-   and click **Run**. This creates all tables, security policies, and the
-   signup trigger.
-3. Go to **Project Settings → API** and copy three values into `.env.local`
-   (copy `.env.example` if it doesn't exist):
-   - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
-   - `anon` `public` key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `service_role` key → `SUPABASE_SERVICE_ROLE_KEY` (server-only, used by the seed script)
-4. Optional, recommended while testing: **Authentication → Providers → Email →
-   turn OFF "Confirm email"** so signups log in immediately.
-
-### 3. Seed card data from CardSight
-
-```bash
-npm run seed:cards -- --query "2023 topps chrome"
-npm run seed:cards -- --query "pokemon 151"
-```
-
-The script searches CardSight sets, seeds the top match into the shared
-`cards` table, and prints alternates you can seed by id:
-
-```bash
-npm run seed:cards -- --set-id <uuid> --category sport --subcategory football
-```
-
-Re-running is safe — rows are upserted on `(source_vendor, vendor_card_id)`.
-Each ~200-card set costs ~3 CardSight API calls (free tier: 750/month).
-
-### 4. Run
-
-```bash
+cp .env.example .env.local   # fill in what you have; everything is optional locally
 npm run dev
 ```
 
-- `/` — landing page
-- `/signup` → claim a username → `/dashboard` — add/reorder/edit page sections
-- `/<username>` — the public, shareable page
+With no environment variables set, the site works fully except:
+- Contact emails are **printed to the terminal** instead of sent.
+- The photo upload field is hidden (needs Supabase).
+- Turnstile is skipped.
 
-## Data model (Phase 0/1)
+## Editing content (no code needed)
 
-`profiles` → `pages` → `components` (polymorphic JSON config), plus the shared
-`cards` reference table and per-user `want_list_items`, `have_list_items`,
-`show_events`, `social_links`. All tables are publicly readable (pages are
-meant to be shared) and owner-writable via RLS. See the
-[PRD phases](supabase/migrations/001_init.sql) for what's next: marketplace &
-reputation (Phase 2), discovery (Phase 3), monetization (Phase 4).
+| What | File |
+| --- | --- |
+| Card shows | `src/content/shows.json` |
+| Copy: what I buy, don't buy, FAQ, how it works, socials, About photo | `src/content/site.ts` |
+| About page story | `src/app/about/page.tsx` |
 
-## Secrets
+**Shows:** add an entry with `startDate` / `endDate` as `YYYY-MM-DD`. Shows are sorted automatically and disappear
+the day after `endDate` (Central time; pages refresh hourly). Leave `table` or `url` as `""` if unknown.
+Replace the three `(sample)` shows before launch.
 
-`.env.local` is gitignored and holds all keys. The `service_role` key must
-never be imported by app code — only `scripts/seed-cards.mjs` uses it.
+**Socials:** paste a URL into `site.socials` to show its icon in the footer; empty ones stay hidden.
+
+## QR codes
+
+Point the printed QR codes at:
+
+- Tablecloth: `https://cardboardmania.com/?src=tablecloth`
+- Stickers: `https://cardboardmania.com/?src=sticker`
+
+The source is remembered for the visit and attached to any contact-form submission, and a `qr_visit` analytics event fires.
+
+## Production setup
+
+1. **Supabase** (submission backup + photos): create a project, run `supabase/schema.sql` in the SQL editor,
+   then set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`.
+2. **Resend** (email): add and verify `cardboardmania.com` in Resend, set `RESEND_API_KEY` and
+   `CONTACT_FROM_EMAIL="Cardboard Mania <no-reply@cardboardmania.com>"`.
+3. **Cloudflare Turnstile** (optional): create a widget for the domain and set
+   `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY`.
+4. **Deploy to Vercel**: import the repo, add the env vars, and enable Web Analytics in the project
+   (custom events `qr_visit` and `contact_submit` need a Vercel plan that includes them).
+5. Point the `cardboardmania.com` DNS at Vercel.
+
+## How the contact form works
+
+- Photos upload directly from the browser to a private Supabase bucket using one-time signed URLs
+  (`/api/upload-url`), so large phone photos don't hit serverless size limits.
+- `/api/contact` validates input, checks the honeypot, rate-limits by IP and verifies Turnstile, then
+  saves a backup row in `contact_submissions`, emails `cardboardmania33@gmail.com` (reply-to = visitor,
+  photos linked for 1 year), and sends the visitor an auto-reply with the next show.
+- The visitor sees an error only if **both** the database save and the email fail.
+
+## Future phases
+
+- **Phase 2 — Showcase:** add a `featured_cards` table and a `/cards` gallery; "Ask about this card"
+  can link to `/contact?intent=buy` (extend the form to accept a `card` param that pre-fills the message).
+- **Phase 3 — Shop:** inventory, filters, cart and checkout (e.g. Stripe). The header, layout and content
+  structure are already set up to add a Shop nav item.

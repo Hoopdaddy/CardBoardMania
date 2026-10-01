@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sample-past-show",
+    "name": "Music City Card Show (sample)",
+    "startDate": "2026-09-12",
+    "endDate": "2026-09-13",
+    "venue": "Sample Expo Center",
+    "address": "123 Example Ave, Nashville, TN",
+    "city": "Nashville, TN",
+    "hours": "Sat 9am–5pm, Sun 10am–3pm",
+    "table": "42",
+    "notes": "",
+    "url": ""
+  },
+  {
+    "id": "sample-spring-hill-oct",
+    "name": "Spring Hill Sports Card Show (sample)",
+    "startDate": "2026-10-17",
+    "endDate": "2026-10-17",
+    "venue": "Sample Community Center",
+    "address": "456 Placeholder Rd, Spring Hill, TN",
+    "city": "Spring Hill, TN",
+    "hours": "9am–3pm",
+    "table": "12",
+    "notes": "Bring your wrestling cards — I'm buying at the table all day.",
+    "url": ""
+  },
+  {
+    "id": "sample-franklin-nov",
+    "name": "Franklin Card & Collectibles Show (sample)",
+    "startDate": "2026-11-07",
+    "endDate": "2026-11-08",
+    "venue": "Sample Fairgrounds Hall",
+    "address": "789 Demo St, Franklin, TN",
+    "city": "Franklin, TN",
+    "hours": "Sat 9am–4pm, Sun 10am–3pm",
+    "table": "",
+    "notes": "Table number TBA.",
+    "url": ""
+  }
+]

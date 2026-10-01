@@ -1,13 +1,75 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #14213d;
-  --color-navy-light: #22335c;
-  --color-accent: #fca311;
-  --color-cream: #f7f5f0;
+  --color-ink: #0f0f12;
+  --color-ink-2: #18181d;
+  --color-ink-3: #24242b;
+  --color-line: #33333d;
+  --color-paper: #f6f3ec;
+  --color-muted: #a8a6b3;
+  --color-red: #e3262f;
+  --color-red-dark: #b81d25;
+  --color-gold: #f5b72b;
+  --font-display: var(--font-anton), "Impact", "Arial Narrow", sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--color-cream);
-  color: #1c1c1c;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+}
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-base font-bold uppercase tracking-wide transition-colors;
+}
+@utility btn-primary {
+  @apply btn bg-red text-white hover:bg-red-dark;
+}
+@utility btn-secondary {
+  @apply btn border-2 border-paper/70 text-paper hover:border-gold hover:text-gold;
+}
+@utility display {
+  @apply font-display uppercase leading-[0.95] tracking-wide;
+}
+@utility eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.2em] text-gold;
+}
+@utility card {
+  @apply rounded-xl border border-line bg-ink-2;
+}
+@utility field {
+  @apply w-full rounded-md border border-line bg-ink px-3 py-3 text-base text-paper placeholder:text-muted/70 focus:border-gold focus:outline-none;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-semibold;
+}
+
+/* Diagonal "ring apron" stripe used behind section headings */
+.stripe {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.04) 0 10px,
+    transparent 10px 20px
+  );
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .faq-icon {
+  transform: rotate(45deg);
 }

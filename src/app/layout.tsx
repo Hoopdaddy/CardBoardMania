@@ -1,21 +1,58 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Anton, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import SourceTracker from "@/components/SourceTracker";
+import { site } from "@/content/site";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+
+// Hourly refresh so the footer's "next show" and show lists drop finished shows.
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Cardboard Mania — Your card page, your way",
-  description:
-    "Build a personalized page for your card collection: want lists, have lists, show schedule, and more. For dealers and collectors across sports, non-sports, and TCGs.",
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name} — I Buy Wrestling Cards | ${site.homeBase}`,
+    template: `%s | ${site.name}`,
+  },
+  description: site.description,
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: `${site.name} — I Buy Wrestling Cards`,
+    description: site.description,
+    url: "/",
+  },
+  twitter: { card: "summary_large_image" },
+  alternates: { canonical: "/" },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export const viewport: Viewport = {
+  themeColor: "#0f0f12",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${anton.variable} ${inter.variable}`}>
+      <body className="flex min-h-dvh flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-gold focus:px-4 focus:py-2 focus:text-ink"
+        >
+          Skip to content
+        </a>
+        <SourceTracker />
+        <Header />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+        <Analytics />
+      </body>
     </html>
   );
 }

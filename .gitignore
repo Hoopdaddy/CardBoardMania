@@ -1,15 +1,8 @@
-# Dependencies
-node_modules/
-
-# Environment files — never commit secrets
+node_modules
+.next
+out
+.env*.local
 .env
-.env.local
-.env.*.local
-
-# Next.js build output
-.next/
-out/
-
-# Misc
-.DS_Store
-*.log
+*.tsbuildinfo
+next-env.d.ts
+.vercel

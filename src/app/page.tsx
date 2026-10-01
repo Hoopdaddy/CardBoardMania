@@ -1,113 +1,137 @@
 import Link from "next/link";
+import ShowCard from "@/components/ShowCard";
+import SellCta from "@/components/SellCta";
+import { buyTiles, howItWorks, site } from "@/content/site";
+import { nextShow } from "@/lib/shows";
 
-const FEATURES = [
-  {
-    title: "Want & Have Lists",
-    desc: "Search a real card database and build the lists that do the talking at every show.",
-    icon: "🃏",
-  },
-  {
-    title: "Show Calendar",
-    desc: "Post where you'll be set up next so buyers and traders can find your table.",
-    icon: "📅",
-  },
-  {
-    title: "Image Gallery",
-    desc: "Show off your best cards, your case setup, or your latest mailday.",
-    icon: "🖼️",
-  },
-  {
-    title: "Social Links",
-    desc: "One link that points to your eBay, Whatnot, Instagram, and everywhere else you sell.",
-    icon: "🔗",
-  },
-  {
-    title: "Every Category",
-    desc: "Sports, TCGs, and non-sports — one page covers your whole collection.",
-    icon: "⚾",
-  },
-  {
-    title: "Discovery (coming soon)",
-    desc: "Collectors will find you by the exact cards on your lists.",
-    icon: "🔍",
-  },
-];
+// Re-check hourly so finished shows drop off without a redeploy.
+export const revalidate = 3600;
 
-export default function Home() {
+export default function HomePage() {
+  const show = nextShow();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    name: site.name,
+    description: site.description,
+    url: site.url,
+    email: site.email,
+    address: { "@type": "PostalAddress", addressLocality: "Spring Hill", addressRegion: "TN", addressCountry: "US" },
+  };
+
   return (
-    <main className="min-h-screen">
-      {/* Nav */}
-      <nav className="bg-navy text-white">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
-          <span className="text-lg font-extrabold tracking-tight">
-            Cardboard<span className="text-accent">Mania</span>
-          </span>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="rounded-md px-3 py-2 text-sm font-medium hover:bg-navy-light"
-            >
-              Log in
-            </Link>
-            <Link
-              href="/signup"
-              className="rounded-md bg-accent px-4 py-2 text-sm font-bold text-navy hover:brightness-110"
-            >
-              Claim your page
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero */}
-      <section className="bg-navy text-white">
-        <div className="mx-auto max-w-5xl px-4 pb-20 pt-14 text-center">
-          <h1 className="mx-auto max-w-2xl text-4xl font-extrabold leading-tight sm:text-5xl">
-            Your card business card.
+      <section className="stripe relative overflow-hidden border-b border-line">
+        <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-red/25 blur-3xl" />
+        <div className="container-x relative py-14 sm:py-24">
+          <p className="eyebrow">Cardboard Mania · {site.homeBase}</p>
+          <h1 className="display mt-3 text-6xl sm:text-7xl lg:text-8xl">
+            I Buy <span className="text-red">Wrestling</span> Cards
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-white/80">
-            One page with your want list, have list, show schedule, and links —
-            built for dealers and collectors, shareable anywhere.
+          <p className="mt-5 max-w-xl text-lg text-paper/90 sm:text-xl">
+            WWE, WWF, WCW, AEW, ECW and more — singles, collections, sealed.
           </p>
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link
-              href="/signup"
-              className="w-full rounded-lg bg-accent px-6 py-3 font-bold text-navy hover:brightness-110 sm:w-auto"
-            >
-              Claim cardboardmania.com/you
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link href="/contact?intent=sell" className="btn-primary text-lg">
+              Sell Your Cards
             </Link>
-            <Link
-              href="/login"
-              className="w-full rounded-lg border border-white/30 px-6 py-3 font-semibold text-white hover:bg-navy-light sm:w-auto"
-            >
-              Log in
+            <Link href="/shows" className="btn-secondary">
+              See Upcoming Shows
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="mx-auto max-w-5xl px-4 py-14">
-        <h2 className="text-center text-2xl font-bold text-navy">
-          Everything a table setup says about you — online
+      {/* Next show */}
+      <section className="container-x mt-12" aria-labelledby="next-show">
+        <div className="mb-4 flex items-end justify-between gap-4">
+          <h2 id="next-show" className="display text-3xl sm:text-4xl">
+            Find me at my <span className="text-gold">next show</span>
+          </h2>
+          <Link href="/shows" className="hidden shrink-0 text-sm font-semibold text-gold hover:underline sm:block">
+            All shows →
+          </Link>
+        </div>
+        {show ? (
+          <ShowCard show={show} featured />
+        ) : (
+          <div className="card p-6 text-paper/85">
+            New shows coming soon — check back or{" "}
+            <Link href="/contact?intent=show" className="font-semibold text-gold underline">
+              contact me
+            </Link>
+            .
+          </div>
+        )}
+        <Link href="/shows" className="mt-3 block text-sm font-semibold text-gold sm:hidden">
+          All shows →
+        </Link>
+      </section>
+
+      {/* What I buy */}
+      <section className="container-x mt-16" aria-labelledby="what-i-buy">
+        <p className="eyebrow">Wrestling first</p>
+        <h2 id="what-i-buy" className="display mt-1 text-3xl sm:text-4xl">
+          What I buy
         </h2>
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((f) => (
-            <div
-              key={f.title}
-              className="rounded-xl border border-navy/10 bg-white p-5 shadow-sm"
-            >
-              <div className="text-2xl">{f.icon}</div>
-              <h3 className="mt-2 font-bold text-navy">{f.title}</h3>
-              <p className="mt-1 text-sm text-gray-600">{f.desc}</p>
-            </div>
+        <ul className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-3">
+          {buyTiles.map((tile, i) => (
+            <li key={tile.title} className="card group relative overflow-hidden p-4 sm:p-6">
+              <span aria-hidden className="display absolute -right-1 -top-3 text-7xl text-paper/5">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="display text-xl text-gold sm:text-2xl">{tile.title}</h3>
+              <p className="mt-2 text-sm text-paper/80">{tile.text}</p>
+            </li>
           ))}
+        </ul>
+        <p className="mt-4 text-sm text-muted">
+          Also buying sports and non-sports cards.{" "}
+          <Link href="/we-buy" className="font-semibold text-gold hover:underline">
+            See everything I buy →
+          </Link>
+        </p>
+      </section>
+
+      {/* How it works */}
+      <section className="container-x mt-16" aria-labelledby="how-it-works">
+        <h2 id="how-it-works" className="display text-3xl sm:text-4xl">
+          How it works
+        </h2>
+        <ol className="mt-6 grid gap-3 sm:grid-cols-3">
+          {howItWorks.map((step, i) => (
+            <li key={step.title} className="card flex gap-4 p-5 sm:flex-col sm:p-6">
+              <span className="display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-red text-2xl text-white">
+                {i + 1}
+              </span>
+              <div>
+                <h3 className="display text-2xl">{step.title}</h3>
+                <p className="mt-1 text-sm text-paper/80">{step.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* Coming soon */}
+      <section className="container-x mt-16">
+        <div className="card flex flex-col items-start gap-4 border-dashed border-gold/50 p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="eyebrow">Coming soon</p>
+            <h2 className="display mt-1 text-2xl sm:text-3xl">Cards for sale online — coming soon</h2>
+            <p className="mt-1 text-sm text-paper/80">Looking for something specific? Send me your want list.</p>
+          </div>
+          <Link href="/contact?intent=buy" className="btn-secondary shrink-0">
+            Send a want list
+          </Link>
         </div>
       </section>
 
-      <footer className="border-t border-navy/10 py-8 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} Cardboard Mania · cardboardmania.com
-      </footer>
-    </main>
+      <SellCta />
+    </>
   );
 }

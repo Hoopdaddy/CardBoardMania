@@ -1,0 +1,86 @@
+// Editable site copy and settings. Change text here; no code changes needed.
+
+export const site = {
+  name: "Cardboard Mania",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://cardboardmania.com",
+  email: "cardboardmania33@gmail.com",
+  homeBase: "Spring Hill, TN",
+  tagline: "I Buy Wrestling Cards",
+  description:
+    "Cardboard Mania buys wrestling cards — WWE, WWF, WCW, AEW, ECW and more. Singles, collections and sealed. Find me at card shows across Middle Tennessee.",
+  // Leave a link empty ("") to hide its icon.
+  socials: {
+    instagram: "",
+    facebook: "",
+    x: "",
+    tiktok: "",
+    youtube: "",
+  },
+  // Optional photo for the About page, e.g. "/about.jpg" placed in /public.
+  aboutPhoto: "",
+};
+
+export const buyTiles = [
+  { title: "Vintage WWF", text: "80s and 90s WWF — Topps, Classic, Merlin and more." },
+  { title: "Graded slabs", text: "PSA, BGS, SGC and CGC — any grade, any era." },
+  { title: "Autos & relics", text: "On-card autos, cut signatures, mat and shirt relics." },
+  { title: "Rookies", text: "Key rookie cards from legends to today's roster." },
+  { title: "Sealed wax", text: "Boxes, packs and cases — WWE, WCW, AEW and beyond." },
+  { title: "Full collections", text: "Binders, boxes and closets. I'll go through all of it." },
+];
+
+export const wrestlingBuys = [
+  "WWE / WWF — Topps, Panini, Fleer, Classic, Merlin, Titan Sports",
+  "WCW, ECW, NWA and territory-era cards",
+  "AEW — Upper Deck and SkyBox",
+  "TNA / Impact, NJPW, lucha and indie releases",
+  "Graded cards, autographs, relics and numbered parallels",
+  "Sealed boxes, packs and factory sets",
+];
+
+export const alsoBuying = [
+  "Baseball, basketball, football and hockey — vintage and modern",
+  "Pokémon, Marvel, Star Wars and other non-sports cards",
+  "Memorabilia that comes with a collection (signed photos, programs)",
+];
+
+// Placeholder copy — edit to match what you actually pass on.
+export const dontBuy = [
+  "Heavily damaged cards (water damage, tears, writing) unless they're rare",
+  "Small lots of modern base cards",
+  "Reprints, customs or counterfeits",
+  "Autographs without verification",
+];
+
+export const howItWorks = [
+  { title: "Send photos", text: "Snap a few pictures and tell me what you have using the form." },
+  { title: "Get an offer", text: "I'll review and reply with a fair, no-pressure offer — usually within a day or two." },
+  { title: "Get paid", text: "Cash or trade at a show, or ship your cards and get paid fast." },
+];
+
+export const faqs = [
+  {
+    q: "How do you decide what to offer?",
+    a: "I look at recent sold prices, condition and demand. Graded and key cards are priced individually; big lots of commons are priced by the box.",
+  },
+  {
+    q: "How do I get paid?",
+    a: "Cash at a show, PayPal, Venmo or Zelle. Trade credit is available too if you'd rather pick up cards from my table.",
+  },
+  {
+    q: "Do I have to bring my cards to a show?",
+    a: "No. You can meet me at a show, arrange a local pickup around Spring Hill, or ship them. I'll walk you through shipping safely.",
+  },
+  {
+    q: "Is there any obligation once I send photos?",
+    a: "None. An offer is just an offer — you're free to say no.",
+  },
+  {
+    q: "Do you buy non-wrestling cards?",
+    a: "Yes. Wrestling is my focus, but I also buy sports and non-sports cards, especially as part of a bigger collection.",
+  },
+  {
+    q: "How big a collection will you look at?",
+    a: "Anything from one card to a whole storage unit. For large collections nearby, I'll come to you.",
+  },
+];
